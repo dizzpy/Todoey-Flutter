@@ -9,6 +9,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: TasksScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
     );
   }
 }
