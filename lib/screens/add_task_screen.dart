@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
+    String newTaskTitle = '';
+
     return Container(
       color: Color(0xff757575),
       child: Container(
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(20.0),
-            topRight: const Radius.circular(20.0),
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+          children: <Widget>[
             Text(
               'Add Task',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.redAccent,
                 fontSize: 30.0,
+                color: Colors.redAccent,
               ),
             ),
             TextField(
@@ -37,11 +39,19 @@ class AddTaskScreen extends StatelessWidget {
                     width: 2.0,
                   ),
                 ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.redAccent,
+                    width: 2.0,
+                  ),
+                ),
               ),
+              onChanged: (newText) {
+                newTaskTitle = newText;
+              },
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 20.0),
             TextButton(
-              onPressed: () {},
               child: Text(
                 'Add',
                 style: TextStyle(
@@ -51,6 +61,11 @@ class AddTaskScreen extends StatelessWidget {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.redAccent),
               ),
+              onPressed: () {
+                Provider.of<TaskData>(context, listen: false)
+                    .addTask(newTaskTitle);
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
