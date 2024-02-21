@@ -1,4 +1,4 @@
-package com.example.todoey_flutter
+package com.dizzzpy.todoey
 
 import io.flutter.embedding.android.FlutterActivity
 
